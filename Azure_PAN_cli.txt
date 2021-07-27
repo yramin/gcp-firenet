@@ -1,0 +1,23 @@
+configure
+set network interface ethernet ethernet1/1 layer3
+set network virtual-router default interface ethernet1/1
+set network interface ethernet ethernet1/1 layer3 dhcp-client create-default-route no
+set zone WAN network layer3 ethernet1/1
+set network interface ethernet ethernet1/2 layer3
+set network virtual-router default interface ethernet1/2
+set network interface ethernet ethernet1/2 layer3 dhcp-client create-default-route no
+set zone LAN network layer3 ethernet1/2
+set rulebase security rules allow-all to any from any destination any source any application any service any log-end yes action allow
+
+set rulebase nat rules Egress source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules Egress to WAN from LAN source any destination any service any to-interface ethernet1/1 description "SNAT for egress"  
+set network profiles interface-management-profile HealthCheck https yes
+set network interface ethernet ethernet1/2 layer3 interface-management-profile HealthCheck
+set mgt-config users admin password    
+commit
+exit
+set system setting jumbo-frame on
+set system setting dpdk-pkt-io on  # need to check if supported in Azure, needs accelerated networking?
+debug show vm-series interfaces all
+
+request restart system
