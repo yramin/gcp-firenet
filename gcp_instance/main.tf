@@ -18,7 +18,7 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>avx test instance"
+  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>avx test instance'"
   metadata = {
     ssh-keys = "mohsinkamal:${var.public_key}"
   }

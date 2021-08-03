@@ -35,12 +35,12 @@ avx_transit = {
 vpc_data_va = {
   spoke_vpc1 = {
     name          = "VPC1-East1"
-    cidr          = "10.40.0.0/16"
+    cidr          = "10.90.0.0/16"
     instance_size = "n1-highcpu-4"
   }
   spoke_vpc2 = {
     name          = "VPC2-East1"
-    cidr          = "10.41.0.0/16"
+    cidr          = "10.91.0.0/16"
     instance_size = "n1-highcpu-4"
   }
 

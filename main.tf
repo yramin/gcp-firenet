@@ -49,6 +49,7 @@ module "aviatrix-create-pan-area-1" {
 
 }
 
+
 module "gcp_ha_spoke_1" {
   source        = "terraform-aviatrix-modules/gcp-spoke/aviatrix"
   version       = "3.0.0"
@@ -73,6 +74,7 @@ module "gcp_ha_spoke_2" {
   instance_size = var.vpc_data_va.spoke_vpc2.instance_size
   single_az_ha  = false
 }
+
 resource "tls_private_key" "avtx_key" {
   algorithm = "RSA"
   rsa_bits  = 2048
@@ -100,3 +102,18 @@ module "test_instance_2" {
   subnetwork = module.gcp_ha_spoke_2.vpc.subnets[0].name
   tags       = "testinstance2"
 }
+
+
+
+//----------------test router applicnce with cloud router -----------
+/*
+resource "google_compute_router" "foobar" {
+  name    = "my-router"
+  network = module.gcp_ha_transit_1.vpc.name
+  bgp {
+    asn            = 64514
+    advertise_mode = "DEFAULT"
+
+
+  }
+}*/

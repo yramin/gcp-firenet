@@ -20,7 +20,7 @@ provider "aviatrix" {
   controller_ip = "52.71.215.202"
   username      = "admin"
   password      = "Aviatrix123#"
-  version       = ">= 2.19.1"
+  version       = ">= 2.19.5"
 }
 
 provider "aws" {
